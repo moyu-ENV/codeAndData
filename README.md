@@ -4,7 +4,7 @@ This repository contains the code and data for the following studies:
 
 * Daily night-time lights reveal prolonging global electric power system recovery times following tropical cyclone damage  ([_blackoutDuration_](https://github.com/moyu-ENV/codeAndData/tree/main/blackoutDuration)). [Mo et al. 2025; Preprint](https://www.researchsquare.com/article/rs-6030545/v1)
 
-* Mo et al. 2023. Tropical cyclone risk to global mangrove ecosystems: potential future regional shifts ([_shiftingRisk2C_](https://github.com/moyu-ENV/codeAndData/tree/main/shiftingRisk2C)). [doi:10.1002/fee.2650; Open access](https://esajournals.onlinelibrary.wiley.com/doi/10.1002/fee.2650)
+* Mo et al. 2023. Tropical cyclone risk to global mangrove ecosystems: potential future regional shifts ([_shiftingRisk2C_](https://github.com/moyu-ENV/codeAndData/tree/main/shiftingRisk2C)). [doi:10.1002/fee.2650](https://esajournals.onlinelibrary.wiley.com/doi/10.1002/fee.2650)
 
 * Turner et al. 2021. Salt Marsh Elevation Limit Determined after Subsidence from Hydrologic Change and Hydrocarbon Extraction ([_marshLAElevation_](https://github.com/moyu-ENV/codeAndData/tree/main/marshLAElevation)). ([doi:10.3390/rs13010049](https://www.mdpi.com/2072-4292/13/1/49))
 
