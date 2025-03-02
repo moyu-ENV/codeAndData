@@ -1,3 +1,3 @@
 This repository contains the code and data for the following studies: 
 
- _Shifting storm damage to global mangrove ecosystems under a changing climate_ ([_shiftingDamage_](https://github.com/moyu-ENV/codeAndData/tree/main/shiftingDamage)) 
+-Shifting storm damage to global mangrove ecosystems under a changing climate ([_shiftingDamage_](https://github.com/moyu-ENV/codeAndData/tree/main/shiftingDamage)) 
