@@ -10,6 +10,8 @@ This repository contains the code and data for the following studies:
 
 * The resilience of coastal marshes to hurricanes: The potential impact of excess nutrients ([_marshLAStorm_](https://github.com/moyu-ENV/codeAndData/tree/main/marshLAStorm)). [Mo et al. 2020; Open access](https://www.sciencedirect.com/science/article/pii/S0160412019312814)
 
+* Salt Marsh Elevation Limit Determined after Subsidence from Hydrologic Change and Hydrocarbon Extraction ([_marshLAElevation_](https://github.com/moyu-ENV/codeAndData/tree/main/marshLAElevation)). ([Turner et al. 2021](https://www.mdpi.com/2072-4292/13/1/49))
+
 * Tropical cyclone risk to global mangrove ecosystems: potential future regional shifts ([_shiftingRisk2C_](https://github.com/moyu-ENV/codeAndData/tree/main/shiftingRisk2C)). [Mo et al. 2023; Open access](https://esajournals.onlinelibrary.wiley.com/doi/10.1002/fee.2650)
   
 * Daily night-time lights reveal prolonging global electric power system recovery times following tropical cyclone damage  ([_blackoutDuration_](https://github.com/moyu-ENV/codeAndData/tree/main/blackoutDuration)). [Mo et al. 2025; Preprint](https://www.researchsquare.com/article/rs-6030545/v1)
