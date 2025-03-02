@@ -1,1 +1,1 @@
-
+As part of Yu Mo’s Doctor of Philosophy dissertation (2017), University of Maryland: _Phenology of Coastal Marshes in Louisiana from 1984-2014: Long- and Short-Term Variations Associated with Climate Change and Disastrous Events_. [doi:10.13016/M2TM72304](https://drum.lib.umd.edu/items/31b67c09-ef46-4c38-8c1e-eda314294fac)
