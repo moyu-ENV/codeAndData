@@ -1,3 +1,7 @@
+#####requirements#####
+#R version 4.4.2
+######################
+
 rm(list = ls())
 
 data <- read.csv('/data/data.csv',stringsAsFactors = FALSE)
@@ -18,7 +22,7 @@ data <- read.csv('/data/data.csv',stringsAsFactors = FALSE)
     ln_mrk_y <- -0.5
     ln_lbl_y <- 1.7
         
-    col <- 'grey'#rgb(230,152,0,maxColorValue = 255)
+    col <- 'grey'
   }
 
 
