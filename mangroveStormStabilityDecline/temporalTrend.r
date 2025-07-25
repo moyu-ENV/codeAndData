@@ -1,3 +1,7 @@
+#####requirements#####
+#R version 4.4.2
+######################
+
 rm(list = ls())
 
 data <- read.csv('/data/data.csv',stringsAsFactors = FALSE)
@@ -46,10 +50,7 @@ if(TRUE){
     col_all <- 'grey40'
     col_tc <- 'black'  
     lwd <- 3
-    gap <- 0.4 
-  
-    #col_react <- rgb(244,124,32,maxColorValue = 255)
-    #col_noReact<- rgb(180,36,121,maxColorValue = 255)
+    gap <- 0.4   
 }
 
 yys <- c('initialResistance','reactionRate','recoveryRate')
@@ -58,9 +59,9 @@ ylms <- list(c(0.7,0.91),c(-0.1,-0.02),c(0.06,0.21))
 ytcks<- list(seq(0.7,0.91,0.03),seq(-0.1,-0.02,0.02),seq(0.06,0.21,0.03))
 ymrks <- list(seq(0.7,0.91,0.03),seq(-0.1,-0.02,0.02),seq(0.06,0.21,0.03))
 
-ylms2 <- list(c(-1,0.4),c(3,-4),c(-5,1))#c(-0.4,0.1),
-ytcks2<- list(seq(-1,0.4,0.2),seq(3,-4,-1),seq(-5,1,1))#seq(-0.4,0.1,0.1),
-ymrks2<- list(seq(-1,0.4,0.4),seq(3,-4,-3),seq(-5,1,2))#seq(-0.4,0.1,0.2),
+ylms2 <- list(c(-1,0.4),c(3,-4),c(-5,1))
+ytcks2<- list(seq(-1,0.4,0.2),seq(3,-4,-1),seq(-5,1,1))
+ymrks2<- list(seq(-1,0.4,0.4),seq(3,-4,-3),seq(-5,1,2))
 
 tiff(file = '/results/Fig4_overTime.tif', width =150, height = 155, units = 'mm', res=300) 
     layout(matrix(seq(1,6,1),3,2, byrow = TRUE),widths=c(1.7,1),heights = c(1))
