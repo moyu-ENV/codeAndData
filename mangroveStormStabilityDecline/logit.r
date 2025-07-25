@@ -1,3 +1,8 @@
+#####requirements#####
+#R version 4.4.2
+#pROC_1.18.5  
+######################
+
 rm(list = ls())
  
 data <- read.csv('/data/data.csv',stringsAsFactors = FALSE)
