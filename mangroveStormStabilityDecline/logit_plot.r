@@ -1,3 +1,7 @@
+#####requirements#####
+#R version 4.4.2
+######################
+
 rm(list = ls())
 
 data_input <- read.csv('/data/data.csv',stringsAsFactors = FALSE)
