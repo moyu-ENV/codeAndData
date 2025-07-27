@@ -1,7 +1,6 @@
-This folder contains the code and data for the study **_Shifting storm damage to global mangrove ecosystems under a changing climate_**. It includes **one dataset** recording mangrove stability to storms from 1981–2021, along with **four R scripts** used for analysis and figure generation.
+This folder contains the code and data for the study **_Shifting storm damage to global mangrove ecosystems under a changing climate_**. It includes **one dataset** recording cyclone damage to mangrove ecosystems worldwide from 2001–2021, along with **four R scripts** used for analysis and figure generation.
 
-
-**Dataset:** The input.csv file contains training data for the model, which is damage to global mangrove ecosystems from all recorded storms worldwide between 2001 and 2021. It is the input for all four scripts, including 23 columns:
+**Dataset:** The input.csv is the input for all four scripts, including 23 columns:
 - Sampling Information (Columns 1–14):
    - Sample ID – Unique identifier for each sample, representing a storm-cell pair
    - Landing – Storm landfall event associated with the sample
