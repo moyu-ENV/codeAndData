@@ -1,7 +1,7 @@
 This folder contains the code and data for the study **_Shifting storm damage to global mangrove ecosystems under a changing climate_**. It includes **two datasets** and **two R scripts** used for analysis and figure generation.
 
 **Dataset:** 
-- input.csv - recorded cyclone damage to mangrove ecosystems worldwide from 2001–2021, including 23 columns:
+- data.csv - recorded cyclone damage to mangrove ecosystems worldwide from 2001–2021, including 23 columns:
    - Sampling Information (Columns 1–14):
       - Sample ID – Unique identifier for each sample, representing a storm-cell pair
       - Landing – Storm landfall event associated with the sample
@@ -27,7 +27,7 @@ This folder contains the code and data for the study **_Shifting storm damage to
        - Coastal Slope
        - Distance to Coastline
 
-- input_stoc.csv - stochastic events (>10,000) with simulated values for predictors and damage, containing 10 columns:
+- data_stoc.csv - stochastic events (>10,000) with simulated values for predictors and damage, containing 10 columns:
    - Sampling Information (Column 1):
        - Sample ID – Unique identifier for each event
    - Predicted Cyclone Damage (Columns 2-4):
