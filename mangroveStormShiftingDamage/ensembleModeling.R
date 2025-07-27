@@ -1,4 +1,14 @@
-###model 
+#####requirements#####
+#R version 4.4.2
+#caret_7.0-1 (for knn)
+#e1071_1.7.16  (for svm)
+#gbm_2.2.2 
+#randomForest_4.7.1.2
+#rpart_4.1.23
+#xgboost_1.7.10.1 
+######################
+
+###emsemble 
 if(TRUE){
   rm(list = ls())
   
@@ -6,82 +16,145 @@ if(TRUE){
   #self-defined function
   ####################  
   if(TRUE){
-    ens <- function(train_data0,test_data0,y_col0,x_cols0){ 
-      #train_data0 <- feed_std
-      #test_data0 <- feed_std
+    ens <- function(mths0,train_data0,test_data0,y_col0,x_cols0,sd0){ 
+      #mths0 <- mths
+      #train_data0 <- train_std
+      #test_data0 <- test_std
       #y_col0 <- y
       #x_cols0 <- allXs
+      #sd0<-1234
+      
       formula <- as.formula(paste(y_col0,"~", paste(x_cols0, collapse = " + ")))  
       
       train_data0 <- train_data0[,c(y_col0,x_cols0)]
-      test_data0 <- test_data0[,c(y_col0,x_cols0)]
+      test_data0 <- test_data0[,c(x_cols0)]
       
-      library(caret) #for rf, gbm, knn
-      fitControl <- trainControl(method = "cv", number = 5, savePredictions = 'final')
-      
-      if(FALSE){
-        set.seed(1) 
-        model_rf <- train(formula,data=train_data0,method='rf',trControl=fitControl,tuneLength=3)
-        pred_rf_train <- predict(object = model_rf,train_data0)
-        pred_rf_test <- predict(object = model_rf,test_data0)
-      }  
-      
-      if(TRUE){
-        set.seed(1)
-        model_gbm <- train(formula,data=train_data0,method='gbm',trControl=fitControl,tuneLength=3,verbos=FALSE)
+      #gbm
+      if('gbm' %in% mths0){
+        set.seed(sd)
+        model_gbm <-  gbm::gbm(formula           = formula,
+                               data              = train_data0,
+                               distribution      = "gaussian",
+                               n.trees           = 500,
+                               interaction.depth = 45,
+                               shrinkage         = 0.14,
+                               n.minobsinnode    = 5,
+                               cv.folds          = 10,
+                               verbose           = FALSE)
+        #train(formula,data=train_data0,method='gbm',trControl=fitControl,tuneLength=3,verbos=FALSE)
         pred_gbm_train <- predict(object = model_gbm,train_data0)
         pred_gbm_test <- predict(object = model_gbm,test_data0)
       }
       
-      if(FALSE){
-        library(e1071) 
-        model_svm <- svm(formula, data=train_data0)
-        pred_svm_train <- predict(model_svm,train_data0,na.action=na.omit)
-        pred_svm_test <- predict(model_svm,test_data0,na.action=na.omit)
-      }
-      
-      if(FALSE){
-        model_knn <- train(formula,data=train_data0,method='knn',trControl=fitControl,tuneLength=3)
+      #knn
+      if('knn' %in% mths0){
+        fitControl <- caret::trainControl(method = "cv", number = 10, savePredictions = 'final')
+        
+        model_knn <-caret::train(train_data0[,c(x_cols0)],train_data0[,y_col0],method='knn',trControl=fitControl, tuneGrid = data.frame(k=9),verbos=FALSE) 
+        # train(formula,data=train_data0,method='knn',trControl=fitControl,tuneLength=3)
         pred_knn_train <- predict(object = model_knn,train_data0)
         pred_knn_test <- predict(object = model_knn,test_data0)  
       }
       
-      library(xgboost) #for xgboost
-      model_xgboost <- xgboost(data = data.matrix(train_data0[,x_cols0]), 
-                               label = train_data0[,y_col0], 
-                               objective = "reg:squarederror",
-                               nrounds=15,
-                               verbose = FALSE)
-      pred_xgboost_train <- predict(model_xgboost, data.matrix(train_data0[,x_cols0]))
-      pred_xgboost_test <- predict(model_xgboost, data.matrix(test_data0[,x_cols0]))
+      #rf
+      if('rf' %in% mths0){
+        set.seed(sd0) 
+        model_rf <- randomForest::randomForest(formula         = formula, 
+                                               data            = train_data0, 
+                                               num.trees       = 100, 
+                                               mtry            = 2,
+                                               min.node.size   = 5,
+                                               replace         = TRUE,
+                                               sample.fraction = 0.5,
+                                               verbose         = FALSE,
+                                               importance      = FALSE)
+        
+        # model_rf <- train(formula,data=train_data0,method='rf',trControl=fitControl,tuneLength=3)
+        pred_rf_train <- predict(object = model_rf,train_data0)
+        pred_rf_test <- predict(object = model_rf,test_data0)
+        
+      }  
       
-      library(rpart) #for rpart
-      model_rpart <- rpart(formula, method="anova", data=train_data0,
-                           control=rpart.control(minsplit=1, minbucket=1, cp=0.01, maxdepth=20))
-      pred_rpart_train <- predict(model_rpart, newdata = train_data0)
-      pred_rpart_test <- predict(model_rpart, newdata = test_data0)
+      #rpart
+      if('rpart' %in% mths0){
+        model_rpart <- rpart::rpart(formula, 
+                                    method  = "anova", 
+                                    data    = train_data0,
+                                    control = rpart::rpart.control(minsplit  = 2, 
+                                                                   minbucket = 2, 
+                                                                   cp        = 0.008, 
+                                                                   maxdepth  = 30))
+        pred_rpart_train <- predict(model_rpart, newdata = train_data0)
+        pred_rpart_test <- predict(model_rpart, newdata = test_data0)
+      }
+      
+      #svm
+      if('svm' %in% mths0){
+        # library(e1071) 
+        model_svm <- e1071::svm(formula, 
+                                data      = train_data0,
+                                kernel    = 'radial',
+                                gamma     = 0.1, 
+                                cost      = 1, 
+                                type      = 'eps-regression', 
+                                tolerance = 0.001, 
+                                epsilon   = 0.1)
+        #  svm(formula, data=train_data0)
+        pred_svm_train <- predict(model_svm,train_data0,na.action=na.omit)
+        pred_svm_test <- predict(model_svm,test_data0,na.action=na.omit)
+      }
+      
+      #xgboost
+      if('xgb' %in% mths0){
+        model_xgboost <- xgboost::xgboost(data              = data.matrix(train_data0[,x_cols0]), 
+                                          label             = train_data0[,y_col0], 
+                                          objective         = 'reg:squarederror',
+                                          booster           = 'gbtree',
+                                          eta               = 0.3,
+                                          nrounds           = 500,
+                                          gamma             = 1,
+                                          alpha             = 1,
+                                          lambda            = 1,
+                                          max_depth         = 11,
+                                          min_child_weight  = 7,
+                                          subsample         = 0.6,
+                                          colsample_bytree  = 0.8,
+                                          colsample_bylevel = 0.6,
+                                          colsample_bynode  = 0.6,
+                                          verbose           = FALSE) 
+        # xgboost(data = data.matrix(train_data0[,x_cols0]), 
+        #                        label = train_data0[,y_col0], 
+        #                       objective = "reg:squarederror",
+        #                       nrounds=15,
+        #                       verbose = FALSE)
+        pred_xgb_train <- predict(model_xgboost, data.matrix(train_data0[,x_cols0]))
+        pred_xgb_test <- predict(model_xgboost, data.matrix(test_data0[,x_cols0]))
+      }
+      
+      train_top<-train_data0[,y_col0]
+      for(m in 1:length(mths0)){
+        train_top<-cbind(train_top, eval(parse(text=paste0('pred_',mths0[m],'_train'))))  
+      }
+      train_top <- as.data.frame(train_top)
+      colnames(train_top)<-c(y_col0,paste0('pred_',mths0))
       
       
-      train_top<-as.data.frame(cbind(train_data0[,y_col0],
-                                     # pred_svm_train,pred_rf_train,pred_knn_train,
-                                     pred_gbm_train,pred_xgboost_train,pred_rpart_train))
-      colnames(train_top)<-c(y_col0,
-                             # "pred_svm","pred_rf","pred_knn",
-                             "pred_gbm",'pred_xgboost','pred_rpart')
-      test_top<-as.data.frame(cbind(test_data0[,y_col0],
-                                    # pred_svm_test,pred_rf_test,pred_knn_test,
-                                    pred_gbm_test, pred_xgboost_test,pred_rpart_test))
-      colnames(test_top)<-c(y_col0,
-                            # "pred_svm","pred_rf","pred_knn",
-                            "pred_gbm",'pred_xgboost','pred_rpart')
+      test_top<-eval(parse(text=paste0('pred_',mths0[1],'_test')))
+      if(length(mths0)>1){
+        for(m in 2:length(mths0)){
+          test_top<-cbind(test_top, eval(parse(text=paste0('pred_',mths0[m],'_test'))))  
+        }}
+      test_top <- as.data.frame(test_top)
+      colnames(test_top)<-c(paste0('pred_',mths0))
       
-      formula_top <- as.formula(paste(y_col0,"~", paste(c(
-        #'pred_gbm','pred_svm','pred_rf','pred_knn',
-        'pred_gbm', 'pred_xgboost','pred_rpart'), collapse = " + ")))  
+      
+      formula_top <- as.formula(paste(y_col0,"~", paste(paste0('pred_',mths0), collapse = " + ")))  
       model_en <- lm(formula_top,data=train_top)
       pred_en <- predict(model_en,test_top,interval="predict")
       
-      return(pred_en)
+      outputList <- list(model_en,pred_en) 
+      
+      return(outputList)
     }    
     
     combineFiles <- function(fileList0,d=1){
@@ -118,12 +191,13 @@ if(TRUE){
   #input
   ##########
   if(TRUE){  
-    #wd <- paste0("C:/Users/Y/Desktop/CHES/TCMangroveModel/") #local
+    #wd <- paste0("C:/YM/CHES/TCMangroveModel/") #local
     wd <- paste0("Z:/TCMangroveModel") #server
     
-    data <- read.csv(paste0(wd,'/result/model/input_fixedCNTRY_rmOutlier.csv'),stringsAsFactors = FALSE)
+    data <- read.csv(paste0(wd,'/result/model/input.csv'),stringsAsFactors = FALSE)
     
-    no_cores<-detectCores()-1 
+    #no_cores<-detectCores()-1
+    no_cores<-8
     wd_para<-paste0(wd,"/result/model/OOBoutput/")
     
     #format input file 
@@ -132,16 +206,15 @@ if(TRUE){
       data$tD <- data$trackDist
       data$cD <- data$coastDist
       idcols <- c('landing','sd','tD','cD')
+      sd<-1234
     }
-    
     
     #set up variables
     if(TRUE){
       allYs <- c("intensity")
       
-      allXs <- c("bathymetry_mean",'coastDist'#,#"elevation_mean",
-                 #"landingSpeed","landingWindMaxLocal2","totalPrec_total"
-      )
+      allXs <- c("windSpeed","windSpeed5day","travelSpeed","rainfall","coastalSlope",'coastDist')#
+      
       
       #adjust 0
       for(var in c(allXs)){
@@ -155,6 +228,8 @@ if(TRUE){
   #modelling
   ###########
   if(TRUE){  
+    mths <- c('rpart','gbm','xgb','rf','knn')#
+    
     output_all <- data.frame(matrix(nrow=0,ncol=27))
     colnames(output_all) <-  c( 'scale',"Y",idcols,"obs_std",
                                 'pred_en','pred_en_upr','pred_en_lwr',
@@ -206,9 +281,51 @@ if(TRUE){
         ################
         #modelling
         ################
-        pred_en <- as.data.frame(ens(feed_std,feed_std,y,allXs))
-        #plot(feed_std[,y],pred_en[,'fit'])
         
+        #choose methods
+        if(FALSE){
+          set.seed(sd) 
+          testRows<- sample(1:nrow(feed_std), round(nrow(feed_std)/10,digits = 0), replace=FALSE)
+          test_std <- feed_std[testRows,]
+          train_std <- feed_std[-testRows,]
+          
+          mths_all <- c('rpart','gbm','xgb') # ,'knn','svm','rf'
+          output_en_model_all <- data.frame(mths=NA,trainR2=NA,testR2=NA,testR2_res=NA)
+          
+          for(nn in 1:length(mths_all)){
+            #nn <- 5  
+            mths_cb<-combn(length(mths_all),nn)
+            
+            for(cc in 1:ncol(mths_cb)){
+              #cc<-1
+              mths <- mths_all[mths_cb[,cc]]
+              
+              #mths <- c('rpart','gbm','xgb'),'rf','knn'
+              model_en <- ens(mths,train_std,test_std,y,allXs,sd)
+              trainR2<-summary(model_en[[1]])$adj.r
+              pred_en <- as.data.frame(model_en[[2]])
+              
+              TSS <- sum((test_std[,y]-mean(test_std[,y]))^2) 
+              RSS <- sum((test_std[,y]-pred_en[,'fit'])^2)
+              r2_res <- 1-RSS/TSS
+              
+              RSS2 <- sum((pred_en[,'fit']-mean(pred_en[,'fit']))^2) 
+              r2 <- RSS2/TSS
+              
+              
+              #plot(test_std[,y],pred_en[,'fit'],main=paste0(c(mths,round(r2,digits = 2),round(r2_res,digits = 2)),collapse = '|'))
+              
+              output_en_model <- data.frame(mths=paste0(mths,collapse = '+'),trainR2=trainR2,testR2=r2,testR2_res=r2_res)       
+              output_en_model_all <- rbind(output_en_model_all,output_en_model)
+            }
+          }  
+          
+          
+        }
+        
+        
+        
+        pred_en <- as.data.frame(ens(mths,feed_std,feed_std,y,allXs,sd)[[2]])
         output<-data.frame(landing=feed_std$landing,sd=feed_std$sd,cD=feed_std$cD,tD=feed_std$tD,obs_std=feed_std[,y],
                            pred_en=pred_en$fit,pred_en_upr=pred_en$upr,pred_en_lwr=pred_en$lwr)
         
@@ -225,7 +342,7 @@ if(TRUE){
         ###OOB
         if(TRUE){ 
           cl <- makeCluster(no_cores)  
-          clusterExport(cl,c("wd_para","feed_std",'idcols','y','allXs','ens'))
+          clusterExport(cl,c("wd_para",'mths',"feed_std",'idcols','y','allXs','ens','sd'))
           
           parLapply(cl,1:nrow(feed_std),
                     function(ind){
@@ -233,7 +350,7 @@ if(TRUE){
                       train_data <- feed_std[-ind,]
                       test_data <- feed_std[ind,]
                       
-                      pred_OOB<- ens(train_data,test_data,y,allXs)
+                      pred_OOB<- ens(mths,train_data,test_data,y,allXs,sd)[[2]]
                       
                       output<-cbind(test_data[,idcols],pred_OOB)
                       write.csv(output,file=paste0(wd_para,"predOOB",ind,".csv"),row.names = FALSE)
@@ -253,10 +370,10 @@ if(TRUE){
         }
         
         ###OOB event
-        if(TRUE){
+        if(FALSE){
           eventList<-unique(feed_std$landing)
           cl <- makeCluster(no_cores)     
-          clusterExport(cl,c('eventList',"wd_para","feed_std",'idcols','y','allXs','ens'))
+          clusterExport(cl,c('eventList',"wd_para",'mths',"feed_std",'idcols','y','allXs','ens','sd'))
           
           parLapply(cl,1:length(eventList),
                     function(id){
@@ -265,7 +382,7 @@ if(TRUE){
                       train_data <- feed_std[-ind,]
                       test_data <- feed_std[ind,]
                       
-                      pred_OOB_event<- ens(train_data,test_data,y,allXs)
+                      pred_OOB_event<- ens(mths,train_data,test_data,y,allXs,sd)[[2]]
                       
                       output<-cbind(test_data[,idcols],pred_OOB_event)
                       write.csv(output,paste0(wd_para,"predOOBEvent",id,".csv"),row.names = FALSE)
@@ -294,92 +411,12 @@ if(TRUE){
     output_all2 <- output_all[,c( 'scale',"Y",idcols,"obs_std",
                                   'pred_en','pred_en_upr','pred_en_lwr',
                                   'pred_en_OOB','pred_en_OOB_upr','pred_en_OOB_lwr',
-                                  'pred_en_OOB_event','pred_en_OOB_event_upr','pred_en_OOB_event_lwr',
+                                  #'pred_en_OOB_event','pred_en_OOB_event_upr','pred_en_OOB_event_lwr',
                                   'obs','pred_en_rcl','pred_en_upr_rcl','pred_en_lwr_rcl',
-                                  'pred_en_OOB_rcl','pred_en_OOB_upr_rcl','pred_en_OOB_lwr_rcl',
-                                  'pred_en_OOB_event_rcl','pred_en_OOB_event_upr_rcl','pred_en_OOB_event_lwr_rcl')]
+                                  'pred_en_OOB_rcl','pred_en_OOB_upr_rcl','pred_en_OOB_lwr_rcl'#,
+                                  #'pred_en_OOB_event_rcl','pred_en_OOB_event_upr_rcl','pred_en_OOB_event_lwr_rcl'
+    )]
     
-    write.csv(output_all2,paste0(wd,'/result/model/ml/output_en_3Method_gbm_xgboost_rpart-coast.csv'),row.names = FALSE)
+    write.csv(output_all,paste0(wd,'/result/model/en/output_en-',paste0(allXs,collapse = '+'),'-',paste0(mths,collapse = '+'),'.csv'),row.names = FALSE)
   }#model
-}#whold block
-
-
-###plot
-if(TRUE){
-  rm(list = ls())
-  library(dplyr)
-  library(tidyr)
-  
-  #wd <- paste0("C:/Users/Y/Desktop/CHES/TCMangroveModel/") #local
-  wd <- paste0("Z:/TCMangroveModel") #server
-  
-  
-  ff <-'en_3Method_gbm_xgboost_rpart-coast'
-  
-  file <- list.files(paste0(wd,'/result/model/ml/'),paste0('output_',ff,'.csv'))
-  data <- read.csv(paste0(wd,'/result/model/ml/',file),stringsAsFactors = FALSE)
-  
-  mdls <- c("pred_en", "pred_en_OOB", "pred_en_OOB_event","pred_en_rcl", "pred_en_OOB_rcl", "pred_en_OOB_event_rcl")
-  obList <- c("obs_std", "obs_std", "obs_std","obs", "obs", "obs")
-  
-  list <- unique(data[,c('scale','Y')])
-  
-  
-  
-  pdf(file = paste0(wd,'/result/figure/','pred_',ff,'.pdf'), width = 8.5, height = 11) 
-  par(oma=c(3,1,3,1),mar=c(5,4,4,1),xpd=FALSE) 
-  layout(matrix(seq(1,12,1), 4, 3, byrow = TRUE))
-  
-  for (row in 1:nrow(list)){
-    #row <- 1 
-    for (mm in 1:length(mdls)){
-      mdl <- mdls[mm]
-      ob <- obList[mm]
-      
-      data_sub <- data[which(data$scale==list[row,'scale'] 
-                             & data$Y==list[row,'Y']),]
-      
-      r2 <- sum((data_sub[,mdl] - mean(data_sub[,ob]))^2)/sum((data_sub[,ob] - mean(data_sub[,ob]))^2)
-      r2res <- 1 - sum((data_sub[,mdl] - data_sub[,ob])^2)/sum((data_sub[,ob] - mean(data_sub[,ob]))^2)
-      mse <- sum((data_sub[,ob]-data_sub[,mdl])^2)/nrow(data_sub)
-      mape <- sum(abs((data_sub[,ob]-data_sub[,mdl]))/data_sub[,ob])/nrow(data_sub)
-      
-      
-      
-      list[row,'n'] <- nrow(data_sub)
-      list[row,paste0('r2_',mdl)] <- r2
-      list[row,paste0('r2res_',mdl)] <- r2res
-      list[row,paste0('mse_',mdl)] <- mse
-      list[row,paste0('mape_',mdl)] <- mape
-      
-      plot(data_sub[,ob],data_sub[,mdl],
-           xlab='obs',ylab=mdl,
-           main=paste0(list[row,'Y'],', ',
-                       '\nen, ',list[row,'scale'],', ','n=',nrow(data_sub),',',
-                       '\nr2=',round(r2, digits = 2) ,', r2res=',round(r2res,digits = 2),
-                       '\nMSE=',round(mse, digits = 2) ,', MAPE=',round(mape,digits = 2))) 
-      abline(a=0,b=1)
-      #list[row,paste0('mse_',mdl)] <- sum((data_sub[,mdl] - data_sub[,'obs'])^2/(data_sub[,'obs'])^2)/nrow(data_sub)
-      #list[row,paste0('mape_',mdl)] <- 1-sum(abs((data_sub[,mdl] - data_sub[,'obs'])/data_sub[,'obs']))/nrow(data_sub)
-    }#loop row
-  }#loop mdl
-  
-  dev.off()
-  
-  #write.csv(list,paste0(wd,'/result/model/ml/r2_en_3Method_rf_xgboost_rpart-storm6var.csv'),row.names = FALSE)
-}
-
-#AUC
-if(FALSE){
-  
-  library(ROCR)
-  perf = prediction(pred1[,2], mydata$Creditability)
-  # 1. Area under curve
-  auc = performance(perf, "auc")
-  auc
-  # 2. True Positive and Negative Rate
-  pred3 = performance(perf, "tpr","fpr")
-  # 3. Plot the ROC curve
-  plot(pred3,main="ROC Curve for Random Forest",col=2,lwd=2)
-  abline(a=0,b=1,lwd=2,lty=2,col="gray")
 }
