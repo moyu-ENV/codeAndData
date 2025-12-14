@@ -1,4 +1,7 @@
-This folder contains the code and data for the study **_Shifting storm damage to global mangrove ecosystems under a changing climate_**. It includes **two datasets** and **two R scripts** used for analysis and figure generation.
+This folder contains the code and data for the study **_Shifting storm damage to global mangrove ecosystems under a changing climate_**. 
+Citation: Mo, Y., Hall, J. W., Baldwin, A. H., Simard, M., & Donohue, I. (2025). Shifting cyclone travel speed and its impact on global mangrove ecosystems. Science Advances, 11(49), eadx6799.
+
+It includes **two datasets** and **two R scripts** used for analysis and figure generation.
 
 **Dataset:** 
 - data.csv - recorded cyclone damage to mangrove ecosystems worldwide from 2001–2021, including 23 columns:
