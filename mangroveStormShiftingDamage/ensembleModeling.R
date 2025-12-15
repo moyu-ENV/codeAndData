@@ -202,9 +202,6 @@ if(TRUE){
     
     #format input file 
     if(TRUE){ 
-      data$sd <- data$side
-      data$tD <- data$trackDist
-      data$cD <- data$coastDist
       idcols <- c('sampleID')
       sd<-1234
     }
