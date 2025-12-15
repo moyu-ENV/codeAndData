@@ -205,13 +205,13 @@ if(TRUE){
       data$sd <- data$side
       data$tD <- data$trackDist
       data$cD <- data$coastDist
-      idcols <- c('landing','sd','tD','cD')
+      idcols <- c('sampleID')
       sd<-1234
     }
     
     #set up variables
     if(TRUE){
-      allYs <- c("intensity")
+      allYs <- c("damage")
       
       allXs <- c("windSpeed","windSpeed5day","travelSpeed","rainfall","coastalSlope",'coastDist')#
       
