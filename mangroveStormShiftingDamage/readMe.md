@@ -2,7 +2,7 @@ This folder contains the code and data for the study **_Shifting storm damage to
 
 Citation: Mo, Y., Hall, J. W., Baldwin, A. H., Simard, M., & Donohue, I. (2025). Shifting cyclone travel speed and its impact on global mangrove ecosystems. Science Advances, 11(49), eadx6799.
 
-It includes **two datasets** and **two R scripts** used for analysis and figure generation.
+It includes **three datasets** and **four R scripts** used for analysis and figure generation.
 
 **Dataset:** 
 - data.csv - recorded cyclone damage to mangrove ecosystems worldwide from 2001–2021, including 23 columns:
@@ -46,10 +46,13 @@ It includes **two datasets** and **two R scripts** used for analysis and figure 
        - Coastal Slope
        - Distance to Coastline
     
-   
+   - output_en.csv - outputs from the ensemble model.
+ 
+  
 **R scripts:**
 - ensembleModeling.R - includes the code for developing the ensemble model, with performance evaluated using Leave-One-Out Cross-Validation (LOOCV).
 - stochasticEventGeneration.R - generates over 10,000 stochastic events based on the historical input dataset.
+- plot_figure1C and plot_figure1D - code for generating figure 1C and 1D in the paper. 
 
 
 
