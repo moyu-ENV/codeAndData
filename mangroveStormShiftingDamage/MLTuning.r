@@ -317,7 +317,7 @@ for(scl in c('log10')){
           #tune
           if(FALSE){
             hyper_grid_rf <- expand.grid(
-              num.trees = c(100),
+              ntree = c(500),
               mtry = c(2,3,4), #Number of random variables collected at each split. sqrt(length(allXs))
               nodesize = seq(5,10,1), 
               sampsize = ceiling(seq(0.1,0.9,0.1)*nrow(train_std)), # ceiling(.632*nrow(x))
@@ -330,7 +330,7 @@ for(scl in c('log10')){
               set.seed(sd)
               model_rf <- randomForest::randomForest(formula = formula, 
                                                      data = train_std, 
-                                                     num.trees       = hyper_grid_rf$num.trees[i], #n_features * 10, 
+                                                     ntree       = hyper_grid_rf$num.trees[i], #n_features * 10, 
                                                      mtry            = hyper_grid_rf$mtry[i],#Number of variables randomly sampled as candidates at each split. Note that the default values are different for classification (sqrt(p) where p is number of variables in x) and regression (p/3)
                                                      nodesize   = hyper_grid_rf$nodesize[i],#Minimum size of terminal nodes.
                                                      # maxnodes = hyper_grid_rf$maxnodes[i],
@@ -353,7 +353,7 @@ for(scl in c('log10')){
           set.seed(sd)  
           model <- randomForest::randomForest(formula         = formula, 
                                               data            = feed_std, 
-                                              num.trees       = 100, 
+                                              ntree           = 500, 
                                               mtry            = 4,
                                               nodesize        = 6,
                                               sampsize        = ceiling(0.9*nrow(feed_std)),
@@ -398,7 +398,7 @@ for(scl in c('log10')){
                         set.seed(sd)
                         model_OOB<-randomForest::randomForest(formula         = formula, 
                                                               data            = train_data, 
-                                                              num.trees       = 100, 
+                                                              ntree           = 500, 
                                                               mtry            = 3,
                                                               nodesize        = 5,
                                                               sampsize        = ceiling(0.9*nrow(train_data)),
