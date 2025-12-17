@@ -61,7 +61,7 @@ if(TRUE){
         set.seed(sd0) 
         model_rf <- randomForest::randomForest(formula         = formula, 
                                                data            = train_data0, 
-                                               num.trees       = 100, 
+                                               ntree           = 500, 
                                                mtry            = 2,
                                                min.node.size   = 5,
                                                replace         = TRUE,
