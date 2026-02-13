@@ -5,4 +5,5 @@ Mo, Y., Thomas, F., Rui, J., & Hall, J. (2025). Daily night-time lights reveal p
 
 It includes one dataset and two R scripts used for analysis and figure generation.
 
-Detailed information on the dataset and its distribution is also available at: https://doi.org/10.5281/zenodo.15383040 
+Detailed information on the dataset and its distribution is also available at: [https://doi.org/10.5281/zenodo.15383040 
+](https://doi.org/10.5281/zenodo.18630963).
