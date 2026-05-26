@@ -13,9 +13,9 @@ data_varImp[which(data_varImp$var%in%c('coastDist','trackDist')),'Estimate']<-(-
   
 #set labels
 if(TRUE){
-    lable <- data.frame(var=c('windSpeed','trackDist','sideTrack','travelSpeed','rainfall',
-                              'stormFreq','coastalSlope','coastDist',
-                              'preEVI','patchSize','canopyHeight','nSpecies'), 
+    lable <- data.frame(var=c('windSpeed','proximityToStormTrack','sideToStormTrack',"travelSpeed","rainfall",
+                          "stormFrequency", "coastalSlope",'ProximityToCoastline',
+                          "pre-stormEVI","patchSize","canopyHeight", "mumberOfSpecies"), 
                         lbl= c('Wind speed','Prox. to track','Side to track','Travel speed', 'Rainfall',
                                'Storm frequency','Coastal slope','Prox. to shore',
                                'Pre-storm EVI','Patch size','Canopy height','No. Species'))
