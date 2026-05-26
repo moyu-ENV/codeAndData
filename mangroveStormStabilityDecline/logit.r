@@ -9,9 +9,9 @@ data <- read.csv('/data/data.csv',stringsAsFactors = FALSE)
 
 allYs <- c("initialResistance",'reactionRate','recoveryRate')
   
-allXs <- c('windSpeed','trackDist','sideTrack',"travelSpeed","rainfall","stormFreq",
-           "coastalSlope",'coastDist',
-           "nSpecies","canopyHeight","preEVI","patchSize")
+allXs <- c('windSpeed','proximityToStormTrack','sideToStormTrack',"travelSpeed","rainfall","stormFrequency",
+           "coastalSlope",'ProximityToCoastline',
+           "mumberOfSpecies","canopyHeight","pre-stormEVI","patchSize")
              
 formula <- as.formula(paste('prob',"~ ", paste(allXs, collapse = " + ")))  
 sd <- 1234
