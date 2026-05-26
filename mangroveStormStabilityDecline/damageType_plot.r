@@ -33,14 +33,14 @@ tiff(file = '/results/Fig2_damageType.tif', width =210, height = 55, units = 'mm
     par(mar =c(1,1,1,3))
     #pie
     if(TRUE){
-      nIDOnly <- sum((data$initialDamage>0 & data$subsequentDamage==0)) #2080
-      prctIDOnly <- round(sum((data$initialDamage>0 & data$subsequentDamage==0))/nrow(data),digits=2)*100 #39%
+      nIDOnly <- sum((data$initialDamage>0 & data$subsequentDamage==0))
+      prctIDOnly <- round(sum((data$initialDamage>0 & data$subsequentDamage==0))/nrow(data),digits=2)*100 
       
-      nIDSD <-  sum((data$initialDamage>0 & data$subsequentDamage>0)) #2053
-      prctIDSD <- round(sum((data$initialDamage>0 & data$subsequentDamage>0))/nrow(data),digits=2)*100 #38
+      nIDSD <-  sum((data$initialDamage>0 & data$subsequentDamage>0))
+      prctIDSD <- round(sum((data$initialDamage>0 & data$subsequentDamage>0))/nrow(data),digits=2)*100 
      
-      nSDOnly <- sum((data$initialDamage==0 & data$subsequentDamage > 0 )) #1228
-      prctSDOnly <- round(sum((data$initialDamage== 0 & data$subsequentDamage > 0))/nrow(data),digits=2)*100 #0.23
+      nSDOnly <- sum((data$initialDamage==0 & data$subsequentDamage > 0 ))
+      prctSDOnly <- round(sum((data$initialDamage== 0 & data$subsequentDamage > 0))/nrow(data),digits=2)*100 
         
       pie(c(nIDOnly,nIDSD,nSDOnly),col=col,border='black',labels = c(' ',' ',' '),radius=0.7,init.angle = 75)
       par(new=TRUE)
