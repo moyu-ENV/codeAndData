@@ -16,25 +16,25 @@ This folder contains the primary dataset and code used to reproduce the key resu
     - Initial Damage
     - Subsequent Damage
     - Total Damage
-    - Total Damage Duration
+    - Total Damage Duration (month)
     - Initial Resistance
-    - Reaction Time
-    - Reaction Rate
-    - Recovery Time
-    - Recovery Rate
+    - Reaction Time (month)
+    - Reaction Rate (/month)
+    - Recovery Time (month)
+    - Recovery Rate (/month)
     - Full Recovery – Indicates if full recovery was observed during the monitoring period
 - Twelve Predictor Variables (Columns 20–31):
-    - Wind Speed
-    - Distance to Storm Track
-    - Side of Storm Track
-    - Storm Travel Speed
-    - Accumulative Rainfall
-    - Historical Storm Frequency
-    - Coastal Slope
-    - Distance to Coastline
+    - Wind Speed (km/h)
+    - Proximity to Storm Track (m)
+    - Side to Storm Track
+    - Travel Speed (km/h)
+    - Accumulative Rainfall (
+    - Storm Frequency (/year)
+    - Coastal Slope (m/m)
+    - Proximity to Coastline (m)
     - Pre-Storm EVI (Enhanced Vegetation Index)
-    - Mangrove Patch Size
-    - Mangrove Canopy Height
+    - Mangrove Patch Size (m2)
+    - Mangrove Canopy Height (m)
     - Number of Species
 
 
