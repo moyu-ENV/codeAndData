@@ -28,7 +28,7 @@ This folder contains the primary dataset and code used to reproduce the key resu
     - Proximity to Storm Track (m)
     - Side to Storm Track
     - Travel Speed (km/h)
-    - Accumulative Rainfall (
+    - Rainfall (mm)
     - Storm Frequency (/year)
     - Coastal Slope (m/m)
     - Proximity to Coastline (m)
