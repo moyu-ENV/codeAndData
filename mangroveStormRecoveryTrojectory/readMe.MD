@@ -3,7 +3,7 @@ This folder contains the code and data for the study **_The shape of ecosystem r
 It includes **two datasets** and **one R script** used for analysis and figure generation.
 
 **Dataset:** 
-- xgb_train.csv - training dataset, containing 14 columns:
+- xgb_train.csv - training dataset, with predictors transformed and standardized, containing 14 columns:
 
       - Sample ID – Unique identifier for each sample
       - disturbanceMax – maximum storm damage
@@ -20,8 +20,8 @@ It includes **two datasets** and **one R script** used for analysis and figure g
       - rainfallCHIRPS6.180d - 6-month post-storm rainfall 
       - bestAIC - shape of the recovery trajectory 
 
-- xgb_test.csv - training dataset, same 14 columns as the training dataset  
+- xgb_test.csv - test dataset, same as the training dataset but for model testing only 
   
 **R scripts:**
-- xgb.R - includes the code for developing the xgb model and SHAP analysis 
+- xgb.R - code for developing the xgb model and SHAP analysis 
 
