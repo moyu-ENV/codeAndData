@@ -20,7 +20,7 @@ if(TRUE){
     y <- 'bestAIC'
     
     allXs <- c( 'disturbanceMax', 
-                "distCoastM","coastalSlope","stormFreq","forestPopulation", 
+                "proxCoastM","coastalSlope","stormFreq","forestPopulation", 
                 "areaM2", "preEVI","canopyHeight","speciesN", 
                 "meanTemp1.6mo","maxTemp1.6mo", "rainfallCHIRPS6.180d")
     sd <- 1234
