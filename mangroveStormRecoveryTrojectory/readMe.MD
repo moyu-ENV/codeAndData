@@ -1,8 +1,8 @@
 This folder contains the code and data for the study **_The shape of ecosystem recovery_**.
 
-It includes **two datasets** and **one R script** used for analysis and figure generation.
+It includes **three datasets** and **two R script** used for analysis and figure generation.
 
-**Dataset:** 
+**Datasets:** 
 - xgb_train.csv - training dataset, with predictors transformed and standardized, containing 14 columns:
 
       - Sample ID – Unique identifier for each sample
