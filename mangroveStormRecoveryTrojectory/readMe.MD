@@ -4,8 +4,8 @@ It includes **two datasets** and **two R scripts** used for analysis and figure 
 
 **Dataset:** 
 - xgb_train.csv - training dataset, containing 14 columns:
-      - Sample ID – Unique identifier for each sample
 
+      - Sample ID – Unique identifier for each sample
       - disturbanceMax – maximum storm damage
       - proxCoastM – Proximity to shoreline
       - coastalSlope - coastal slope 
