@@ -1,4 +1,4 @@
-This folder contains the primary dataset and code used to reproduce the key results in the study **_Propagating Storm Damage and Eroding Stability in Global Mangroves_**. It includes **two datasets** recording mangrove stability to storms from 1981–2021, along with **four R scripts** used for analysis and figure generation.
+This folder contains the primary dataset and code used to reproduce the key results in the study **_Propagating Storm Damage and Eroding Stability in Global Mangroves_**. It includes **two datasets** recording mangrove stability to storms from 1981–2021, along with **three R scripts** used for analysis and figure generation.
 
 
 **Dataset:** The two datasets are mangrove stability and potential drivers derived using the Global Mangrove Watch (input_GMW.csv) and Global Mangrove Forests Distribution (input_GMFD), including 37 columns:
@@ -46,6 +46,5 @@ This folder contains the primary dataset and code used to reproduce the key resu
 
 **R scripts:**
 - damageType_plot.r – Generates statistics and visualizations comparing initial vs. subsequent damage. Corresponds to Figure 2 and S1-S3 in the manuscript.
-- xgb.r – Fits a logistic regression model to assess the relationship between mangrove stability and predictor variables.
-- xgb_plot.r – Plots the results of the logistic regression model. Corresponds to Figure 3 in the manuscript.
+- xgb.r – Builds XGBoost models to assess the relationship between mangrove stability and predictor variables.
 - temporalTrend_plot.r – Analyzes and plots temporal trends in mangrove stability. Corresponds to Figure 4 in the manuscript.
