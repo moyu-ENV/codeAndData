@@ -39,7 +39,7 @@ This folder contains the primary dataset and code used to reproduce the key resu
 
 
 **R scripts:**
-- damageType_plot.r – Generates statistics and visualizations comparing initial vs. subsequent damage. Corresponds to Figure 2 in the manuscript.
-- logit.r – Fits a logistic regression model to assess the relationship between mangrove stability and predictor variables.
-- logit_plot.r – Plots the results of the logistic regression model. Corresponds to Figure 3 in the manuscript.
+- damageType_plot.r – Generates statistics and visualizations comparing initial vs. subsequent damage. Corresponds to Figure 2 and S1-S3 in the manuscript.
+- xgb.r – Fits a logistic regression model to assess the relationship between mangrove stability and predictor variables.
+- xgb_plot.r – Plots the results of the logistic regression model. Corresponds to Figure 3 in the manuscript.
 - Temporal_trend.r – Analyzes and plots temporal trends in mangrove stability. Corresponds to Figure 4 in the manuscript.
