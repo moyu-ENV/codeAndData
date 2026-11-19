@@ -11,15 +11,15 @@ It includes **three datasets** and **two R scripts** used for analysis and figur
       - lon - longitude of centroid of the mangrove patch 
       - lat	- latitude of centroid of the mangrove patch
       - ISO3 - country of the event located 
-      - continent - continent of the event located
-      - subregion - subregion of the event located
+      - continent - continent of the event location
+      - subregion - subregion of the event location
       - typology - typology of mangroves of each event (four values: coast, delta, estuary, lagoon)	
       - recovered - if full recovery is observed (1) or not (0)	
       - recoverTime - recovery time (month)
       - rangeY - range of %EVI changes during recovery period 
       - rangeX - range of time period over recovery period (time elapsed from the point of maximum damage to either full recovery or the end of the satellite observation period, whichever occurs first) 
       - minY - minimum %EVI, at the start of the recovery curve 
-      - minX - t at maximum damage, also the start of recovery curve 	
+      - minX - t at maximum damage, also the start of the recovery curve 	
       - lmRMSE - RMSE for the linear model fitted
       - lmAIC - AIC for the linear model fitted
       - lmP - P-value for the linear model fitted
