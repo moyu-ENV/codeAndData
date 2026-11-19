@@ -1,41 +1,46 @@
 This folder contains the primary dataset and code used to reproduce the key results in the study **_Propagating Storm Damage and Eroding Stability in Global Mangroves_**. It includes **two datasets** recording mangrove stability to storms from 1981–2021, along with **four R scripts** used for analysis and figure generation.
 
 
-**Dataset:** The two datasets are mangrove stability and potential drivers derived using the Global Mangrove Watch and Global Mangrove Forests Distribution, including 31 columns:
-- Sampling Information (Columns 1–9):
-   - Sample ID – Unique identifier for each sample, representing a storm-mangrove patch pair
-   - Landing – Storm landfall event associated with the sample
-   - ROI ID – Identifier for the mangrove patch affected by the storm
-   - Year – Year of observation (range: 1981–2021)
-   - Longitude – Longitude of the mangrove patch centroid
-   - Latitude – Latitude of the mangrove patch centroid
-   - Basin – Storm basin where the event occurred (values: East Pacific (EP), North Atlantic (NAt), North Indian Ocean (NI), South Indian Ocean (SI), South Pacific (SP), West Pacific (WP))
+**Dataset:** The two datasets are mangrove stability and potential drivers derived using the Global Mangrove Watch (input_GMW.csv) and Global Mangrove Forests Distribution (input_GMFD), including 37 columns:
+- Sampling Information (Columns 1–12):
+   - sample ID – Unique identifier for each sample, representing a storm-mangrove patch pair
+   - SID - Storm ID from the International Best Track Archive for Climate Stewardship (IBTrACS) 
+   - basin – Storm basin where the event occurred (values: East Pacific (EP), North Atlantic (NAt), North Indian Ocean (NI), South Indian Ocean (SI), South Pacific (SP), West Pacific (WP))
+   - landing – Storm landfall event associated with the sample
+   - roiID – Identifier for the mangrove patch affected by the storm
+   - year – Year of observation (range: 1981–2021)
+   - lon – Longitude of the mangrove patch centroid
+   - lat – Latitude of the mangrove patch centroid
    - ISO3 – ISO 3-letter country code
-   - Continent – Continent where the sample is located
-- Storm Damage and Mangrove Stability Metrics (Columns 10–19):
-    - Initial Damage
-    - Subsequent Damage
-    - Total Damage
-    - Total Damage Duration (month)
+   - subregion – Region where the sample is located 
+   - continent – Continent where the sample is located
+   - typology - typology of mangroves  
+- Storm Damage and Mangrove Stability Metrics (Columns 13–23):
+    - initialDamage
+    - subsequentDamage
+    - totalDamage
+    - totalDamageDuration (month)
     - Initial Resistance
     - Reaction Time (month)
     - Reaction Rate (/month)
     - Recovery Time (month)
     - Recovery Rate (/month)
     - Full Recovery – Indicates if full recovery was observed during the monitoring period
-- Twelve Predictor Variables (Columns 20–31):
-    - Wind Speed (km/h)
-    - Proximity to Storm Track (m)
-    - Side to Storm Track
-    - Travel Speed (km/h)
-    - Rainfall (mm)
-    - Storm Frequency (/year)
-    - Coastal Slope (m/m)
-    - Proximity to Coastline (m)
-    - Pre-Storm EVI (Enhanced Vegetation Index)
-    - Mangrove Patch Size (m2)
-    - Mangrove Canopy Height (m)
-    - Number of Species
+- Twelve Predictor Variables (Columns 24–37):
+    - windSpeed: wind speed at track(km/h)
+    - proxTrack: Proximity to Storm Track (m)
+    - sideTrack: Side to Storm Track
+    - travelSpeed: storm travel speed (km/h)
+    - rainfall (mm)
+    - stormFreq: Storm Frequency (/year)
+    - coastalSlope: Coastal Slope (m/m)
+    - proxCoast: Proximity to Coastline (m)
+    - patchSize: Mangrove Patch Size (m2)
+    - preEVI: Pre-Storm EVI (Enhanced Vegetation Index)
+    - canopyHeight: Mangrove Canopy Height (m)
+    - speciesN: Number of Species
+    - postTmean
+    - postRainfall
 
 
 **R scripts:**
