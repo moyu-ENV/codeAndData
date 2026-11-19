@@ -39,8 +39,9 @@ This folder contains the primary dataset and code used to reproduce the key resu
     - preEVI: Pre-Storm EVI (Enhanced Vegetation Index)
     - canopyHeight: Mangrove Canopy Height (m)
     - speciesN: Number of Species
-    - postTmean
-    - postRainfall
+    - postTmean: post-storm mean temperature
+    - postTmax: post-storm max temperature
+    - postRainfall: post-storm rainfall
 
 
 **R scripts:**
