@@ -1,7 +1,7 @@
 This folder contains the primary dataset and code used to reproduce the key results in the study **_Propagating Storm Damage and Eroding Stability in Global Mangroves_**. It includes **two datasets** recording mangrove stability to storms from 1981–2021, along with **four R scripts** used for analysis and figure generation.
 
 
-**Dataset:** The two datasets are mangrove stability and potential drivers derived using the Global Mangrove Watch (Bunting et al. 2022) and Global Mangrove Forests Distribution (Giri et al. 2011), including 31 columns:
+**Dataset:** The two datasets are mangrove stability and potential drivers derived using the Global Mangrove Watch and Global Mangrove Forests Distribution, including 31 columns:
 - Sampling Information (Columns 1–9):
    - Sample ID – Unique identifier for each sample, representing a storm-mangrove patch pair
    - Landing – Storm landfall event associated with the sample
@@ -10,8 +10,8 @@ This folder contains the primary dataset and code used to reproduce the key resu
    - Longitude – Longitude of the mangrove patch centroid
    - Latitude – Latitude of the mangrove patch centroid
    - Basin – Storm basin where the event occurred (values: East Pacific (EP), North Atlantic (NAt), North Indian Ocean (NI), South Indian Ocean (SI), South Pacific (SP), West Pacific (WP))
-    - ISO3 – ISO 3-letter country code
-    - Continent – Continent where the sample is located
+   - ISO3 – ISO 3-letter country code
+   - Continent – Continent where the sample is located
 - Storm Damage and Mangrove Stability Metrics (Columns 10–19):
     - Initial Damage
     - Subsequent Damage
