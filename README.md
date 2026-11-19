@@ -1,6 +1,6 @@
 This repository contains the code and data for the following studies: 
 
-* Declines in global mangrove ecosystem stablity to storms ([_mangroveStormStabilityDecline_](https://github.com/moyu-ENV/codeAndData/tree/main/shiftingDamage))
+* Shifts in global mangrove ecosystem stablity to storms ([_mangroveStormStabilityShift_](https://github.com/moyu-ENV/codeAndData/tree/main/shiftingDamage))
   
 * Shifting storm damage to global mangrove ecosystems under a changing climate ([_mangroveStormShiftingDamage_](https://github.com/moyu-ENV/codeAndData/tree/main/shiftingDamage)) 
 
