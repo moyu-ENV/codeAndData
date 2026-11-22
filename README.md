@@ -1,6 +1,6 @@
 This repository contains the code and data for the following studies: 
 
-* The shape of recovery ([_Recovery Shape_](https://github.com/moyu-ENV/codeAndData/tree/main/recoveryShape))
+* The shape of recovery ([_Recovery Shape_](https://github.com/moyu-ENV/codeAndData/tree/main/mangroveRecoveryShape))
   
 * Shifts in global mangrove ecosystem stablity to storms ([_mangroveStormStabilityShift_](https://github.com/moyu-ENV/codeAndData/tree/main/shiftingDamage))
   
